@@ -1,10 +1,8 @@
-# Imagen base
-FROM Ubuntu:2204
+FROM ubuntu:22.04
 
-# Variables de entorno para evitar prompts interactivos
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Actualización e instalación de dependencias
+# Instalar dependencias
 RUN apt-get update && \
     apt-get install -y \
     apache2 \
@@ -26,7 +24,8 @@ RUN apt-get update && \
     gawk \
     dc \
     gettext && \
-    apt-get clean
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 # Crear usuario y grupo nagios
 RUN useradd nagios && \
@@ -47,18 +46,18 @@ RUN wget https://assets.nagios.com/downloads/nagioscore/releases/nagios-4.4.6.ta
     make install-config && \
     make install-webconf
 
-# Configurar contraseña web
+# Crear usuario web
 RUN htpasswd -b -c /usr/local/nagios/etc/htpasswd.users nagiosadmin nagiosadmin
 
-# Habilitar módulos de Apache
+# Activar módulos Apache
 RUN a2enmod rewrite cgi
 
-# Agregar script de arranque
+# Copiar script de arranque
 COPY start_nagios.sh /start_nagios.sh
 RUN chmod +x /start_nagios.sh
 
-# Exponer el puerto 80
+# Exponer puerto HTTP
 EXPOSE 80
 
-# Comando por defecto al iniciar el contenedor
+# Iniciar Nagios
 CMD ["/start_nagios.sh"]
