@@ -12,9 +12,11 @@ Aquí se implementa una solución de monitoreo basada en **Nagios Core** usando 
 - Git & GitHub
 
 ## 📁 Estructura del repositorio
-´´´
+
 ev2-docker-ecs-nagios/
+
 ├── Dockerfile
+
 └── start_nagios.sh
 
 ---
