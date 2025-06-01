@@ -23,51 +23,42 @@ ev2-docker-ecs-nagios/
 
 ### 1. Clonar el repositorio
 
-```bash
 git clone https://github.com/YasCF/ev2-docker-ecs-nagios.git
 cd ev2-docker-ecs-nagios
+
 ## 2. Dar permisos de ejecución al script
-bash
-Copiar
-Editar
+
 chmod +x start_nagios.sh
 
-3. Construir la imagen Docker
-bash
-Copiar
-Editar
+## 3. Construir la imagen Docker
+
 docker build -t ev2_nagios-docker-ecs .
-4. Ejecutar el contenedor
-bash
-Copiar
-Editar
+
+## 4. Ejecutar el contenedor
+
 docker run -d -p 8080:80 --name nagios ev2_nagios-docker-ecs
-5. Acceder a Nagios
+
+## 5. Acceder a Nagios
+
 Abre tu navegador y ve a:
 
-arduino
-Copiar
-Editar
-http://localhost:8080
-Credenciales:
+- http://localhost:8080
 
-Usuario: nagiosadmin
+### Credenciales:
 
-Contraseña: nagiosadmin
+- Usuario: nagiosadmin
+- Contraseña: nagiosadmin
 
-🛠️ Descripción técnica
-La imagen está basada en ubuntu:22.04.
+## 🛠️ Descripción técnica
 
-Nagios se instala y configura para ejecutarse automáticamente junto con Apache.
+- La imagen está basada en ubuntu:22.04.
+- Nagios se instala y configura para ejecutarse automáticamente junto con Apache.
+- Se incluye un script de arranque start_nagios.sh que inicia los servicios requeridos.
+- El puerto 80 del contenedor se expone localmente en el puerto 8080.
 
-Se incluye un script de arranque start_nagios.sh que inicia los servicios requeridos.
+## 👤 Autor
 
-El puerto 80 del contenedor se expone localmente en el puerto 8080.
-
-👤 Autor
 Yasna Candia
-
 Duoc UC – Ingeniería en Infraestructura y Plataformas Tecnológicas
-
 Evaluación Parcial 2 – DIY7111: Tecnologías de Virtualización
 
